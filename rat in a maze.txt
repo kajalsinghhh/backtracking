@@ -1,0 +1,23 @@
+public class Solution {
+
+
+    
+	public static boolean ratInAMaze2(int maze[][],int i,int j,int[][] path){
+int n = maze.length -1;
+if(i < 0 || j < 0 || j > n || i > n || maze[i][j]==0 || path[i][j]==1)return false;
+
+path[i][j] = 1;
+if(i==n && j==n)return true;
+ if(ratInAMaze2(maze,i-1,j,path))return true;
+ if(ratInAMaze2(maze,i,j+1,path))return true;
+ if(ratInAMaze2(maze,i+1,j,path))return true;
+ if(ratInAMaze2(maze,i,j-1,path))return true;
+return false;
+	
+}
+		public static boolean ratInAMaze(int maze[][]){
+		
+      int[][] pathMatrix = new int[maze.length][maze.length];
+	  return ratInAMaze2(maze,0,0,pathMatrix);
+	}
+}
