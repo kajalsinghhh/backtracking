@@ -1,0 +1,43 @@
+public class Solution {
+	
+		
+public static void placeNQueens(int n){
+
+	
+    int[][] printMat = new int[n][n];
+        placeNQueens_2(printMat,0,n);
+	}
+    
+public static void placeNQueens_2(int[][] print,int i,int n){
+      if(n == i){
+		  for(int r = 0;r<n;r++){
+			  for(int c = 0;c<n; c++){
+				  System.out.print(print[r][c]+" ");
+			  }
+		  }
+	        System.out.println();
+			return;
+	  }
+
+    for(int c = 0; c<n ; c++){
+		boolean isPolssible = checkCanBePlace(print,i,c,n); // check -> kya (i,c) iss position pe queen rakh skte hai
+		if(isPolssible==true){
+			print[i][c]= 1;
+			placeNQueens_2(print,i+1,n);
+		}
+		print[i][c]=0;
+	   }  
+	}
+// upar ki direction me check krenge diagonal/and up
+ public static boolean checkCanBePlace(int[][] print, int i, int j,int n){   
+          for(int back = 1; back<=i; back++){
+		      if(i-back>=0 && print[i-back][j]==1 ) // vertically up direction
+			      return false;
+		      if(j-back>=0 &&i-back>=0 && print[i-back][j-back] ==1) // diagonally up-left direction
+	               return false;
+			  if(j+back<n &&i-back>=0 &&  print[i-back][j+back] ==1 ) // diagonally up-right direction
+			       return false;
+		  }
+           return true;
+         }
+    }
